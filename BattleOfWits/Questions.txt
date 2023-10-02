@@ -1,0 +1,21 @@
+C# Syntax
+1. What is the correct syntax for declaring a variable in C#?
+A. var variableName;
+B. int variableName;
+C. variableName int;
+D. declare variableName;
+Correct: B
+
+2. Which symbol is used to indicate a single-line comment in C#?
+A. //
+B. #
+C. /*
+D. '
+Correct: A
+
+3. How do you declare a constant in C#?
+A. const int constantName = 10;
+B. readonly int constantName = 10;
+C. static int constantName = 10;
+D. final int constantName = 10;
+Correct: A
