@@ -26,11 +26,18 @@ namespace BattleOfWits
             string gameLoader2 = "==";
             string gameLoader3 = "                    ";
             (string Name, string Surname) = ("", "");
+            int score = 0;
             Dictionary<string, string> players = new Dictionary<string, string>();
+            Dictionary<string, int> playersScore = new Dictionary<string, int>();
+            Dictionary<int, string> answersInput = new Dictionary<int, string>();
+            Dictionary<int, string> answers = new Dictionary<int, string>();
+            List<string[]> questions = new List<string[]>();
 
-            List<string[]> questions = ReadQuestionsFromFile(filePath);
+            (questions, answers) = ReadQuestionsFromFile(filePath);
+            Shuffle(questions);
 
             printWelcome();
+
             // Login Window
             foreach (var items in questions)
             {
@@ -170,15 +177,12 @@ namespace BattleOfWits
                             Console.WriteLine("Chose 4");
                             Thread.Sleep(1000);
                             Console.Clear();
-                            printWelcome();
-                            printHiscores(players, playerExists);
-                            key = Console.ReadKey().Key;
                             do
                             {
                                 Thread.Sleep(1000);
                                 Console.Clear();
                                 printWelcome();
-                                printHiscores(players, playerExists);
+                                printHiscores(playersScore, playerExists);
                                 key = Console.ReadKey().Key;
                             }
                             while (key != ConsoleKey.Q);
@@ -194,28 +198,60 @@ namespace BattleOfWits
                             Console.WriteLine("Chose 5");
                             Thread.Sleep(1000);
                             Console.Clear();
+                            do
+                            {
+                                if (!playerExists)
+                                {
+                                    Console.WriteLine("There's no Logged In User at the moment!");
+                                    Thread.Sleep(1000);
+                                }
+                                if (playerExists)
+                                {
+                                    answersInput = printQuestions(questions);
+                                    score = checkAnswers(answersInput, answers);
+                                    playersScore = saveScores(Name, Surname, score, true);
+                                }
+                                Console.WriteLine("----------------------------------------------------------");
+                                Console.WriteLine("Press any key to continue or 'q' to quit to MENU:");
+                                key = Console.ReadKey().Key;
+                                if (key == ConsoleKey.Q)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Redirecting to MENU...");
+                                    Thread.Sleep(1000);
+                                    break;
+                                }
+                            }
+                            while (key != ConsoleKey.Q);
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                            break;
+                        case "6":
+                            Console.WriteLine("Chose 5");
+                            Thread.Sleep(1000);
+                            Console.Clear();
                             printMenu(Name, Surname);
                             break;
                         default:
                             Console.WriteLine("My buddy, a wrong choice you've made here!");
                             Thread.Sleep(1000);
+
+
+
+                            //while (!playerExists)
+                            //{
+                            //    // Login Window
+                            //    (Name, Surname) = logIn(Name, Surname, playerExists);
+                            //    // Add player
+                            //    players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
+
+                            //}
                             Console.Clear();
                             break;
                     }
                 }
             }
 
-
-
-
-            //while (!playerExists)
-            //{
-            //    // Login Window
-            //    (Name, Surname) = logIn(Name, Surname, playerExists);
-            //    // Add player
-            //    players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
-
-            //}
             // Init the game
             while (gameRuns)
             {
@@ -413,68 +449,180 @@ namespace BattleOfWits
             playerExists = true;
             return players;
         }
-
-        public static void saveScores(string Name, string Surname, int score, bool saveOrPrint)
+        public static Dictionary<string, int> saveScores(string Name, string Surname, int score, bool saveOrPrint)
         {
-            if (saveOrPrint)
+            Dictionary<string, int> playersScore = new Dictionary<string, int>();
+            string fullName = Name + " " + Surname;
+
+            if (playersScore.TryGetValue(fullName, out int scoreOld))
             {
-                // save score
+                scoreOld += score;
+                playersScore.Add(fullName, scoreOld);
             }
+            playersScore.Add(fullName, score);
+
             if (!saveOrPrint)
             {
                 // print score
             }
+            return playersScore;
         }
 
-        public static void printHiscores(Dictionary<string, string> players, bool playerExists)
+        public static void printHiscores(Dictionary<string, int> players, bool playerExists)
         {
-            if (!playerExists)
-            {
-                Console.WriteLine("----------------------------------------------------------");
-                Console.WriteLine("Only Logged In users can view the wall of Legends!");
-            }
-
             if (playerExists)
             {
                 Console.WriteLine("----------------------------------------------------------");
                 Console.Write($"                      HISCORES:");
+                int i = 1;
                 foreach (var kvp in players)
                 {
-                    Console.Write("1st PLACE: ");
-                    Console.WriteLine(kvp.Key, kvp.Value);
+                    Console.Write($"\n{i} PLACE: ");
+                    Console.WriteLine($"{kvp.Key}, {kvp.Value}");
+                    i++;
+                }
+                if (players.Count == 0)
+                {
+                    Console.WriteLine("\nThere are no players that have participated \nin the Battle of Wits game yet!");
                 }
             }
         }
 
-        static List<string[]> ReadQuestionsFromFile(string filePath)
+        public static (List<string[]>, Dictionary<int, string>) ReadQuestionsFromFile(string filePath)
         {
             List<string[]> questions = new List<string[]>();
             string[] lines = File.ReadAllLines(filePath);
             List<string> currentQuestion = new List<string>();
-            Dictionary<int, string> anwers = new Dictionary<int, string>();
-            string answerNum;
+            Dictionary<int, string> answers = new Dictionary<int, string>();
+            int answerNum = 0;
             string answerLet;
 
             foreach (string line in lines)
             {
-                if (char.IsDigit(line[0]))
+                if (line.Length > 0)
                 {
-                    answerNum = line.Substring(1);
+                    if (char.IsDigit(line[0]))
+                    {
+                        answerNum = Convert.ToInt32(line.Split('.')[0]);
+                    }
+                    if (!line.StartsWith("Correct") && !line.StartsWith("**C#"))
+                    {
+                        currentQuestion.Add(line); // Add question text and answer options
+                    }
                 }
                 if (line.StartsWith("Correct:"))
                 {
                     answerLet = new string(line.Substring(9));
-                    currentQuestion.Add(line.Substring(9)); // Add the correct answer
+                    //currentQuestion.Add(line.Substring(9)); // Add the correct answer
                     questions.Add(currentQuestion.ToArray());
                     currentQuestion.Clear();
-                }
-                else
-                {
-                    currentQuestion.Add(line); // Add question text and answer options
+                    answers.Add(answerNum, answerLet);
                 }
             }
 
-            return questions;
+            return (questions, answers);
+        }
+
+        // Shuffle a list using the Fisher-Yates shuffle algorithm
+        static void Shuffle(List<string[]> list)
+        {
+            Random random = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                string[] value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+
+        // A separate method to print questions not in Main method
+        public static Dictionary<int, string> printQuestions(List<string[]> list)
+        {
+            Dictionary<int, string> answersInput = new Dictionary<int, string>();
+            int qNum = 0;
+            string qLet;
+            int i = 0;
+            foreach (var items in list)
+            {
+                Console.Clear();
+                printWelcome();
+                Console.WriteLine("----------------------------------------------------------");
+                foreach (var item in items)
+                {
+
+                    if (char.IsDigit(item[0]))
+                    {
+                        qNum = Convert.ToInt32(item.Split('.')[0]);
+                    }
+
+                    Console.WriteLine(item.ToString());
+                }
+                Console.WriteLine();
+                Console.Write("Your answer: ");
+                qLet = Console.ReadLine().ToUpper();
+
+                if (qLet != "A" && qLet != "B" && qLet != "C" && qLet != "D")
+                {
+                    do
+                    {
+                        Console.WriteLine("WRONG INPUT!");
+                        Console.Write("Your answer: ");
+                        qLet = Console.ReadLine().ToUpper();
+                    }
+                    while (qLet != "A" && qLet != "B" && qLet != "C" && qLet != "D");
+                }
+                answersInput.Add(qNum, qLet);
+                Console.WriteLine($"Thank you your answer {qLet} for question {qNum} is registered! \nLoading next...");
+                Thread.Sleep(4000);
+                i++;
+                if (i == 2) break;
+            }
+            return answersInput;
+        }
+
+        public static int checkAnswers(Dictionary<int, string> answersInput, Dictionary<int, string> answers)
+        {
+            // Compare the two dictionaries
+            bool allAnswersCorrect = true;
+            int score = 0;
+            foreach (var kvp in answersInput)
+            {
+                int questionNumber = kvp.Key;
+                string actualAnswer = kvp.Value;
+
+                if (answers.TryGetValue(questionNumber, out string expectedAnswer))
+                {
+                    if (actualAnswer != expectedAnswer)
+                    {
+                        Console.WriteLine($"Question {questionNumber}: Incorrect Answer ok: {answers[questionNumber]}, nok: {answersInput[questionNumber]}");
+                        allAnswersCorrect = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Question {questionNumber}: Correct Answer {answers[questionNumber]}");
+                        score++;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Question {questionNumber}: No Answer Provided");
+                    allAnswersCorrect = false;
+                }
+            }
+
+            if (allAnswersCorrect)
+            {
+                Console.WriteLine("All answers are correct!");
+            }
+            else
+            {
+                Console.WriteLine("Some answers are incorrect.");
+            }
+            return score;
+
         }
     }
 }

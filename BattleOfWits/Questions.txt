@@ -1,21 +1,1692 @@
-C# Syntax
+**C# Syntax**
+
 1. What is the correct syntax for declaring a variable in C#?
-A. var variableName;
-B. int variableName;
-C. variableName int;
-D. declare variableName;
+A. int = 5;
+B. var myVariable = 5;
+C. myVariable = 5;
+D. int myVariable;
+
 Correct: B
 
-2. Which symbol is used to indicate a single-line comment in C#?
-A. //
-B. #
-C. /*
-D. '
+2. Which symbol is used to indicate the end of a statement in C#?
+A. ;
+B. :
+C. ,
+D. /
+
 Correct: A
 
-3. How do you declare a constant in C#?
-A. const int constantName = 10;
-B. readonly int constantName = 10;
-C. static int constantName = 10;
-D. final int constantName = 10;
+3. Which of the following is a valid C# comment style for single-line comments?
+A. // This is a comment
+B. /* This is a comment */
+C. # This is a comment
+D. ' This is a comment
+
+Correct: A
+
+4. What is the purpose of curly braces {} in C#?
+A. To define a string
+B. To define an array
+C. To create a code block
+D. To declare a method
+
+Correct: C
+
+5. In C#, what does the "using" keyword indicate in a program?
+A. It specifies a variable's data type.
+B. It includes a namespace for use in the program.
+C. It denotes the end of a method.
+D. It starts a loop.
+
+Correct: B
+
+6. Which of the following is a correct C# method declaration?
+A. public void myMethod()
+B. myMethod(int x)
+C. void myMethod(int x)
+D. public myMethod() int
+
+Correct: A
+
+7. What is the purpose of the "return" statement in a C# method?
+A. It defines the method's name.
+B. It specifies method parameters.
+C. It indicates the value the method should return.
+D. It ends the method's execution.
+
+Correct: C
+
+8. Which of the following is a valid C# class declaration?
+A. class MyClass { }
+B. My_Class { }
+C. class = MyClass { }
+D. Class MyClass { }
+
+Correct: A
+
+9. In C#, what does the "new" keyword do?
+A. Deletes an object
+B. Allocates memory for an object
+C. Calls a method
+D. Declares a variable
+
+Correct: B
+
+10. Which C# operator is used for assigning a value to a variable?
+A. =
+B. ==
+C. :=
+D. ->
+
+Correct: A
+
+**C# Output**
+
+11. How do you print output to the console in C#?
+A. System.out.print("Hello, World!");
+B. print("Hello, World!");
+C. Console.WriteLine("Hello, World!");
+D. echo("Hello, World!");
+
+Correct: C
+
+12. Which method is used to display a message in a message box in a C# Windows Forms application?
+A. MessageBox.Show()
+B. Console.WriteLine()
+C. System.out.print()
+D. System.Diagnostics.Debug.WriteLine()
+
+Correct: A
+
+13. What is the purpose of the Console.WriteLine() method in C#?
+A. It reads input from the console.
+B. It writes text to the console and adds a newline character.
+C. It clears the console screen.
+D. It waits for user input.
+
+Correct: B
+
+14. How do you format and display a variable value within a string in C#?
+A. "The value is {variable}"
+B. "The value is %variable%"
+C. "The value is $variable"
+D. "The value is " + variable
+
+Correct: A
+
+15. What does the Console.Write() method do in C#?
+A. It writes text to the console with a newline character.
+B. It reads input from the console.
+C. It clears the console screen.
+D. It writes text to the console without adding a newline character.
+
+Correct: D
+
+16. Which of the following is used to format the output in C#?
+A. \n
+B. \t
+C. %d
+D. All of the above
+
+Correct: D
+
+17. What is the difference between Console.Write() and Console.WriteLine() in C#?
+A. Console.Write() adds a newline character, while Console.WriteLine() does not.
+B. Console.WriteLine() adds a newline character, while Console.Write() does not.
+C. They both perform the same function.
+D. Console.Write() only works with integers.
+
+Correct: B
+
+18. How do you clear the console screen in a C# console application?
+A. Console.Clear()
+B. Clear.Console()
+C. Console.ResetScreen()
+D. ClearScreen()
+
+Correct: A
+
+19. What is the purpose of the Console.Error.WriteLine() method in C#?
+A. It displays debugging information.
+B. It writes text to the console's error stream.
+C. It clears the console screen.
+D. It waits for user input.
+
+Correct: B
+
+20. Which method is used to read user input from the console in C#?
+A. Console.Read()
+B. Console.ReadLine()
+C. Console.Input()
+D. Console.GetUserInput()
+
+Correct: B
+
+**C# Comments**
+
+21. How do you write a single-line comment in C#?
+A. // This is a comment
+B. /* This is a comment */
+C. # This is a comment
+D. ' This is a comment
+
+Correct: A
+
+22. What is the purpose of comments in C#?
+A. To execute code
+B. To indicate the end of a method
+C. To document and explain code
+D. To declare variables
+
+Correct: C
+
+23. Which of the following is a valid way to write a multi-line comment in C#?
+A. // This is a multi-line comment
+B. /* This is a multi-line comment */
+C. ''' This is a multi-line comment
+D. # This is a multi-line comment #
+
+Correct: B
+
+24. What happens to comments in C# when you compile your code?
+A. They are displayed in the console.
+B. They are executed as part of the program.
+C. They are removed by the compiler and not included in the compiled code.
+D. They cause compilation errors.
+
+Correct: C
+
+25. Which of the following is the correct way to comment out a block of code in C#?
+A. // This is a block of code //
+B. /* This is a block of code */
+C. # This is a block of code #
+D. ' This is a block of code
+
+Correct: B
+
+26. What is the purpose of XML comments in C#?
+A. They are used to disable code temporarily.
+B. They are used for writing unit tests.
+C. They are used to provide documentation for code elements.
+D. They are used to comment out entire methods.
+
+Correct: C
+
+27. Which of the following is an example of an XML comment tag in C#?
+A. <summary>This is a summary.</summary>
+B. # This is a summary #
+C. /* This is a summary */
+D. ' This is a summary
+
+Correct: A
+
+28. What is the recommended way to document a C# method using XML comments?
+A. Place a single-line comment above the method.
+B. Surround the method with /* */ comments.
+C. Use the <summary> tag to describe the method's purpose.
+D. Use the ' tag to specify the return value.
+
+Correct: C
+
+29. In C#, which character is used to start a single-line comment?
+A. /
+B. *
+C. #
+D. '
+
+Correct: A
+
+30. How do you comment out multiple lines of code in C# using XML comments?
+A. Use <comment> and </comment> tags.
+B. Use <multiline> and </multiline> tags.
+C. Use <multiline-comment> and </multiline-comment> tags.
+D. XML comments cannot be used for multiline comments.
+
+Correct: D
+
+**C# Variables**
+
+31. What is a variable in C#?
+A. A fixed value
+B. A container for storing data
+C. A function
+D. A constant
+
+Correct: B
+
+32. In C#, variable names are case-sensitive. What does this mean?
+A. Variable names must always be written in uppercase.
+B. Variable names can have different meanings depending on their case.
+C. Variable names must always be written in lowercase.
+D. Variable names cannot contain letters.
+
+Correct: B
+
+33. How do you declare a variable in C# without assigning a value to it?
+A. var myVariable;
+B. myVariable = null;
+C. myVariable = "";
+D. int myVariable;
+
+Correct: A
+
+34. What is the data type of a variable declared as "double" in C#?
+A. Whole number
+B. Floating-point number
+C. Text
+D. Boolean
+
+Correct: B
+
+35. Which of the following is not a valid variable name in C#?
+A. myVariable123
+B. 123myVariable
+C. _myVariable
+D. MyVariable
+
+Correct: B
+
+36. What is the scope of a local variable in C#?
+A. It can be accessed from anywhere in the program.
+B. It can only be accessed within the method or block where it is declared.
+C. It can be accessed from any method in the same class.
+D. It can be accessed from any class in the program.
+
+Correct: B
+
+37. How do you initialize (assign a value to) a variable when declaring it in C#?
+A. var myVar = 42;
+B. myVar := 42;
+C. myVar -> 42;
+D. myVar = 42;
+
+Correct: A
+
+38. What is the value of an uninitialized variable in C#?
+A. 0
+B. null
+C. ""
+D. It depends on the data type
+
+Correct: D
+
+39. What is the purpose of the "var" keyword in C#?
+A. It specifies the variable's data type.
+B. It indicates that the variable is a constant.
+C. It allows you to declare a variable without specifying its data type explicitly.
+D. It is used to perform mathematical operations.
+
+Correct: C
+
+40. Which of the following is not a valid C# data type for a variable?
+A. int
+B. bool
+C. string
+D. array
+
+Correct: D
+
+**C# Data Types**
+
+41. Which data type is used to represent whole numbers in C#?
+A. double
+B. float
+C. int
+D. string
+
+Correct: C
+
+42. What is the data type of a variable that can hold true or false values in C#?
+A. bool
+B. int
+C. double
+D. char
+
+Correct: A
+
+43. Which data type is used for storing text in C#?
+A. bool
+B. int
+C. double
+D. string
+
+Correct: D
+
+44. What is the range of values that can be stored in an "int" data type in C#?
+A. -128 to 127
+B. -32768 to 32767
+C. -2,147,483,648 to 2,147,483,647
+D. 0 to 255
+
+Correct: C
+
+45. Which data type is used to store decimal numbers with a high degree of precision in C#?
+A. double
+B. float
+C. decimal
+D. int
+
+Correct: C
+
+46. What is the data type of a variable that can store a single character in C#?
+A. int
+B. char
+C. string
+D. bool
+
+Correct: B
+
+47. Which data type is used for storing numbers with a fractional part in C#?
+A. int
+B. double
+C. char
+D. bool
+
+Correct: B
+
+48. What is the data type of a variable that can store a sequence of characters in C#?
+A. int
+B. char
+C. string
+D. bool
+
+Correct: C
+
+49. Which data type is used to represent a single Unicode character in C#?
+A. int
+B. char
+C. string
+D. bool
+
+Correct: B
+
+50. What is the data type of a variable that can store very large or very small numbers in C# with a wide range of precision?
+A. double
+B. float
+C. decimal
+D. int
+
+Correct: A
+
+**C# Type Casting**
+
+51. What is type casting in C#?
+A. It's a way to change the type of a variable during runtime.
+B. It's a way to create new data types.
+C. It's a way to store multiple types in a single variable.
+D. It's a way to compare data types.
+
+Correct: A
+
+52. What is the result of casting a double to an int in C# when the double value is 5.8?
+A. 5
+B. 6
+C. 5.8
+D. Error
+
+Correct: B
+
+53. What is the purpose of explicit type casting in C#?
+A. To convert data types automatically.
+B. To convert data types without checking for compatibility.
+C. To convert data types with the use of the "as" keyword.
+D. To convert data types with the use of type-specific methods.
+
+Correct: D
+
+54. How do you perform explicit type casting in C#?
+A. (int)myDouble
+B. int.Parse(myDouble)
+C. Convert.ToInt32(myDouble)
+D. myDouble as int
+
+Correct: A
+
+55. What is the result of casting an int to a double in C# when the int value is 10?
+A. 10
+B. 10.0
+C. Error
+D. 0
+
+Correct: B
+
+56. Which of the following type casting operations in C# might result in data loss?
+A. Casting a double to an int
+B. Casting an int to a double
+C. Casting a string to a char
+D. Casting a char to a string
+
+Correct: A
+
+57. What happens if you try to cast a string that contains non-numeric characters to an int in C#?
+A. It results in a compilation error.
+B. It converts the string to 0.
+C. It throws an exception at runtime.
+D. It converts the string to the ASCII value of the first character.
+
+Correct: C
+
+58. What is the purpose of implicit type casting in C#?
+A. To convert data types without checking for compatibility.
+B. To convert data types with the use of the "as" keyword.
+C. To convert data types automatically when it's safe to do so.
+D. To convert data types with type-specific methods.
+
+Correct: C
+
+59. Which of the following casting methods in C# should be used when you need to handle possible format exceptions?
+A. (int)myDouble
+B. int.Parse(myDouble)
+C. Convert.ToInt32(myDouble)
+D. myDouble as int
+
+Correct: B
+
+60. What is the result of casting a boolean value (true) to an int in C#?
+A. 0
+B. 1
+C. Error
+D. -1
+
+Correct: B
+
+**C# User Input**
+
+61. How do you read a single character of user input in C#?
+A. Console.ReadLine()
+B. Console.ReadKey()
+C. Console.Read()
+D. Console.GetUserInput()
+
+Correct: B
+
+62. What is the purpose of the Console.ReadLine() method in C#?
+A. It reads a single character from the user.
+B. It reads a line of text input from the user.
+C. It clears the console screen.
+D. It waits for user input without reading it.
+
+Correct: B
+
+63. How do you convert user input from a string to an integer in C#?
+A. int.Parse()
+B. Convert.ToInt32()
+C. ParseInt()
+D. ToInt()
+
+Correct: A
+
+64. Which of the following is used to prompt the user for input in C#?
+A. Console.Read()
+B. Console.WriteLine()
+C. Console.Print()
+D. Console.Write()
+
+Correct: B
+
+65. What is the purpose of the Console.ReadKey() method in C#?
+A. It reads a line of text input from the user.
+B. It reads a single character from the user without displaying it.
+C. It displays a message to the user.
+D. It clears the console screen.
+
+Correct: B
+
+66. How do you read a line of user input as a string in C#?
+A. Console.Read()
+B. Console.ReadLine()
+C. Console.ReadKey()
+D. Console.GetInput()
+
+Correct: B
+
+67. What does the Console.ReadLine() method return in C#?
+A. A single character
+B. A boolean value
+C. A string
+D. An integer
+
+Correct: C
+
+68. How can you handle exceptions when converting user input to a specific data type in C#?
+A. Use try-catch blocks
+B. Ignore exceptions
+C. Use Console.IgnoreErrors()
+D. Use Console.TryParse()
+
+Correct: A
+
+69. How do you display a message to the user and then read their input in C#?
+A. Use Console.ReadMessage()
+B. Use Console.Write() followed by Console.Read()
+C. Use Console.WriteLine() followed by Console.ReadLine()
+D. Use Console.Print() followed by Console.Input()
+
+Correct: C
+
+70. What is the purpose of the Console.Clear() method in C#?
+A. It clears the console screen.
+B. It displays a message to the user.
+C. It waits for user input.
+D. It closes the console application.
+
+Correct: A
+
+**C# Operators**
+
+71. Which operator is used for addition in C#?
+A. +
+B. -
+C. *
+D. /
+
+Correct: A
+
+72. What is the result of the expression 10 % 3 in C#?
+A. 3
+B. 1
+C. 0
+D. 10
+
+Correct: B
+
+73. What is the result of the expression "Hello" + "World" in C#?
+A. "HelloWorld"
+B. "Hello World"
+C. "Hello" + " " + "World"
+D. Error
+
+Correct: A
+
+74. What does the == operator do in C#?
+A. It checks if two values are not equal.
+B. It assigns a value to a variable.
+C. It checks if two values are equal.
+D. It performs logical NOT.
+
+Correct: C
+
+75. Which operator is used for logical AND in C#?
+A. &
+B. &&
+C. |
+D. ||
+
+Correct: B
+
+76. What is the result of the expression (5 > 3) && (4 < 7) in C#?
+A. true
+B. false
+C. 8
+D. Error
+
+Correct: A
+
+77. What is the purpose of the ++ operator in C#?
+A. It decrements a variable by 1.
+B. It increments a variable by 2.
+C. It increments a variable by 1.
+D. It checks for equality.
+
+Correct: C
+
+78. Which operator is used for division in C#?
+A. +
+B. -
+C. *
+D. /
+
+Correct: D
+
+79. What is the result of the expression 6 / 2 in C#?
+A. 3.0
+B. 3
+C. 0.3333
+D. Error
+
+Correct: B
+
+80. What is the purpose of the % operator in C#?
+A. It performs addition.
+B. It performs subtraction.
+C. It calculates the remainder of division.
+D. It checks for equality.
+
+Correct: C
+
+**C# Math**
+
+81. Which namespace is used for mathematical functions in C#?
+A. System.Console
+B. System.Math
+C. System.Convert
+D. System.String
+
+Correct: B
+
+82. How do you calculate the square root of a number in C# using the Math class?
+A. Math.Sqrt(number)
+B. Math.SquareRoot(number)
+C. Math.Pow(number, 0.5)
+D. Math.Log(number)
+
+Correct: A
+
+83. Which method in the Math class is used to find the absolute value of a number in C#?
+A. Math.Abs()
+B. Math.Sign()
+C. Math.Pow()
+D. Math.Floor()
+
+Correct: A
+
+84. What does the Math.Floor() method do in C#?
+A. Rounds a number to the nearest integer greater than or equal to it
+B. Rounds a number to the nearest integer less than or equal to it
+C. Rounds a number to the nearest even integer
+D. Rounds a number to the nearest odd integer
+
+Correct: B
+
+85. Which mathematical constant is represented by Math.PI in C#?
+A. The square root of 2
+B. Euler's number (e)
+C. The ratio of a circle's circumference to its diameter
+D. The golden ratio
+
+Correct: C
+
+86. How do you calculate the power of a number in C# using the Math class?
+A. Math.Power(base, exponent)
+B. Math.Exponent(base, exponent)
+C. Math.Pow(base, exponent)
+D. Math.Square(base, exponent)
+
+Correct: C
+
+87. Which method in the Math class is used to round a number to the nearest integer in C#?
+A. Math.Floor()
+B. Math.Ceiling()
+C. Math.Round()
+D. Math.Truncate()
+
+Correct: C
+
+88. What is the result of Math.Max(5, 8) in C#?
+A. 5
+B. 8
+C. 13
+D. Error
+
+Correct: B
+
+89. How do you calculate the natural logarithm (base e) of a number in C# using the Math class?
+A. Math.Log(number)
+B. Math.Ln(number)
+C. Math.Log10(number)
+D. Math.Exp(number)
+
+Correct: A
+
+90. Which method in the Math class is used to calculate the sine of an angle in C#?
+A. Math.Sin()
+B. Math.Cos()
+C. Math.Tan()
+D. Math.Asin()
+
+Correct: A
+
+**C# Strings**
+
+91. What is a string in C#?
+A. A numeric data type
+B. A collection of characters
+C. A floating-point data type
+D. A boolean data type
+
+Correct: B
+
+92. How do you declare a string variable in C#?
+A. string myString;
+B. var myString;
+C. myString = "";
+D. All of the above
+
+Correct: A
+
+93. What is the result of concatenating two strings in C# using the + operator?
+A. They are multiplied together.
+B. They are added together as numbers.
+C. They are combined to form a new string.
+D. Error
+
+Correct: C
+
+94. What is the length of an empty string in C#?
+A. 0
+B. 1
+C. -1
+D. Error
+
+Correct: A
+
+95. How do you access an individual character of a string in C#?
+A. myString[index]
+B. myString.charAt(index)
+C. myString.Substring(index)
+D. myString.IndexOf(index)
+
+Correct: A
+
+96. Which method is used to find the position of a substring within a string in C#?
+A. String.IndexOf()
+B. String.Find()
+C. String.Substring()
+D. String.Contains()
+
+Correct: A
+
+97. What does the String.ToLower() method do in C#?
+A. Converts all characters in the string to lowercase.
+B. Converts all characters in the string to uppercase.
+C. Removes all spaces from the string.
+D. Reverses the characters in the string.
+
+Correct: A
+
+98. How do you check if a string starts with a specific prefix in C#?
+A. String.StartsWith()
+B. String.Contains()
+C. String.Equals()
+D. String.IndexOf()
+
+Correct: A
+
+99. Which method in C# is used to replace all occurrences of a substring in a string with another substring?
+A. String.Replace()
+B. String.Insert()
+C. String.Concat()
+D. String.Trim()
+
+Correct: A
+
+100. What is the purpose of the String.IsNullOrEmpty() method in C#?
+A. It checks if a string is empty or contains only spaces.
+B. It checks if a string is null or contains a value.
+C. It converts a string to lowercase.
+D. It reverses a string.
+
+Correct: B
+
+**C# Booleans**
+
+101. What is the data type of a boolean variable in C#?
+A. int
+B. string
+C. double
+D. bool
+
+Correct: D
+
+102. How many possible values can a boolean variable in C# have?
+A. 0
+B. 1
+C. 2
+D. 3
+
+Correct: C
+
+103. What are the two possible boolean values in C#?
+A. True and False
+B. Yes and No
+C. On and Off
+D. 1 and 0
+
+Correct: A
+
+104. What does the ! operator do in C# when applied to a boolean expression?
+A. It performs logical AND.
+B. It performs logical OR.
+C. It negates (flips) the boolean value.
+D. It checks for equality.
+
+Correct: C
+
+105. What is the result of the expression (true && false) in C#?
+A. true
+B. false
+C. Error
+D. 1
+
+Correct: B
+
+106. Which operator is used for logical OR in C#?
+A. &
+B. &&
+C. |
+D. ||
+
+Correct: D
+
+107. What is the result of the expression (true || false) in C#?
+A. true
+B. false
+C. Error
+D. 1
+
+Correct: A
+
+108. How do you compare two boolean values for equality in C#?
+A. Use the == operator
+B. Use the != operator
+C. Use the & operator
+D. Use the | operator
+
+Correct: A
+
+109. What does the && operator do in C#?
+A. Performs logical OR
+B. Performs logical NOT
+C. Performs logical AND
+D. Performs bitwise AND
+
+Correct: C
+
+110. What is the result of the expression (true ^ false) in C#?
+A. true
+B. false
+C. Error
+D. The expression is not valid
+
+Correct: A
+
+**C# If...Else**
+
+111. What is the purpose of the "if" statement in C#?
+A. To declare a variable
+B. To repeat a block of code
+C. To conditionally execute code
+D. To perform mathematical calculations
+
+Correct: C
+
+112. How do you write an "if" statement in C#?
+A. if (condition) { /* code to execute */ }
+B. case condition: /* code to execute */
+C. for (condition) { /* code to execute */ }
+D. while (condition) { /* code to execute */ }
+
+Correct: A
+
+113. What is the purpose of the "else" keyword in C#?
+A. To indicate the start of an "if" statement
+B. To indicate the end of an "if" statement
+C. To specify code that should be executed if the "if" condition is false
+D. To specify code that should always be executed
+
+Correct: C
+
+114. How do you write an "if-else" statement in C#?
+A. if (condition) { /* code to execute */ } else { /* code to execute */ }
+B. if (condition) { /* code to execute */ } elsif { /* code to execute */ }
+C. case (condition) { /* code to execute */ } else { /* code to execute */ }
+D. for (condition) { /* code to execute */ } else { /* code to execute */ }
+
+Correct: A
+
+115. What is the purpose of the "else if" statement in C#?
+A. To indicate the end of an "if" statement
+B. To specify code that should be executed if the "if" condition is true
+C. To specify code that should be executed if the "if" condition is false
+D. To specify code that should be executed if another condition is true
+
+Correct: D
+
+116. How do you write an "else if" statement in C#?
+A. if (condition) { /* code to execute */ } else if (otherCondition) { /* code to execute */ }
+B. if (condition) { /* code to execute */ } else { /* code to execute */ } if (otherCondition) { /* code to execute */ }
+C. for (condition) { /* code to execute */ } else if (otherCondition) { /* code to execute */ }
+D. case (condition) { /* code to execute */ } else if (otherCondition) { /* code to execute */ }
+
+Correct: A
+
+117. What is the result of the following code in C#?
+-------------------------------------
+int x = 5;
+if (x > 10)
+{
+ Console.WriteLine("x is greater than 10");
+}
+else if (x < 10)
+{
+ Console.WriteLine("x is less than 10");
+}
+else
+{
+ Console.WriteLine("x is equal to 10");
+}
+-------------------------------------
+A. "x is greater than 10"
+B. "x is less than 10"
+C. "x is equal to 10"
+D. No output is generated.
+
+Correct: B
+
+118. What happens if no conditions in an "if-else if-else" statement are true in C#?
+A. The program crashes
+B. The "if" block is executed
+C. The "else" block is executed
+D. No code inside any block is executed
+
+Correct: D
+
+119. Which of the following is a valid way to compare two values for equality in C#?
+A. x = y
+B. x == y
+C. x != y
+D. x >= y
+
+Correct: B
+
+120. What is the purpose of the ternary conditional operator (?:) in C#?
+A. To declare variables
+B. To repeat a block of code
+C. To conditionally assign a value
+D. To perform mathematical calculations
+
+Correct: C
+
+**C# Switch**
+
+121. What is the purpose of the "switch" statement in C#?
+A. To declare variables
+B. To repeat a block of code
+C. To conditionally execute code based on the value of an expression
+D. To perform mathematical calculations
+
+Correct: C
+
+122. How do you write a "switch" statement in C#?
+A. switch (expression) { case value: /* code to execute */ break; }
+B. if (condition) { /* code to execute */ } else { /* code to execute */ }
+C. for (condition) { /* code to execute */ } switch (expression) { /* code to execute */ }
+D. while (condition) { /* code to execute */ } switch (expression) { /* code to execute */ }
+
+Correct: A
+
+123. What is the purpose of the "case" keyword in a "switch" statement in C#?
+A. To declare variables
+B. To indicate the end of a case block
+C. To specify code that should be executed when a particular value matches the expression
+D. To perform mathematical calculations
+
+Correct: C
+
+124. What is the purpose of the "break" keyword in a "switch" statement in C#?
+A. To declare variables
+B. To indicate the end of a case block
+C. To specify code that should be executed when a particular value matches the expression
+D. To exit the switch statement and continue with the next line of code
+
+Correct: D
+
+125. How do you specify the default case in a "switch" statement in C#?
+A. case default:
+B. default case:
+C. case else:
+D. default:
+
+Correct: D
+
+126. What is the result of the following code in C#?
+-------------------------------------
+int day = 3;
+string dayName;
+
+switch (day)
+{
+ case 1:
+  dayName = "Monday";
+  break;
+ case 2:
+  dayName = "Tuesday";
+  break;
+ case 3:
+  dayName = "Wednesday";
+  break;
+ default:
+  dayName = "Unknown";
+  break;
+}
+-------------------------------------
+A. dayName contains "Monday"
+B. dayName contains "Tuesday"
+C. dayName contains "Wednesday"
+D. dayName contains "Unknown"
+
+Correct: C
+
+127. What happens if there is no "break" statement in a "case" block in a "switch" statement in C#?
+A. The program crashes
+B. The program skips the current case and executes the next one
+C. The program throws an exception
+D. The program exits the switch statement
+
+Correct: B
+
+128. Which of the following data types can be used as the expression in a "switch" statement in C#?
+A. int
+B. string
+C. double
+D. All of the above
+
+Correct: D
+
+129. What is the purpose of the "goto" keyword in C#?
+A. To declare variables
+B. To exit a loop
+C. To jump to a specific label in the code
+D. To perform mathematical calculations
+
+Correct: C
+
+130. Which of the following is true regarding the use of the "goto" statement in C#?
+A. It is widely recommended for improving code readability.
+B. It is often considered a bad practice and should be used sparingly.
+C. It is used to create loops in C#.
+D. It is equivalent to the "break" statement.
+
+Correct: B
+
+**C# While Loop**
+
+131. What is the purpose of a "while" loop in C#?
+A. To declare variables
+B. To repeat a block of code while a condition is true
+C. To conditionally execute code based on the value of an expression
+D. To perform mathematical calculations
+
+Correct: B
+
+132. How do you write a "while" loop in C#?
+A. for (initialization; condition; update) { /* code to execute */ }
+B. while (condition) { /* code to execute */ }
+C. do { /* code to execute */ } while (condition);
+D. if (condition) { /* code to execute */ }
+
+Correct: B
+
+133. What is the purpose of the "do-while" loop in C#?
+A. To declare variables
+B. To repeat a block of code while a condition is true
+C. To conditionally execute code based on the value of an expression
+D. To perform mathematical calculations
+
+Correct: B
+
+134. How does a "do-while" loop differ from a "while" loop in C#?
+A. The "do-while" loop has an additional "do" keyword.
+B. The "do-while" loop always executes its code at least once.
+C. The "do-while" loop requires an "if" statement.
+D. The "do-while" loop cannot have a condition.
+
+Correct: B
+
+135. What is the result of the following code in C#?
+-------------------------------------
+int i = 0;
+while (i < 5)
+{
+ Console.WriteLine(i);
+ i++;
+}
+-------------------------------------
+A. It prints numbers from 0 to 4.
+B. It prints numbers from 1 to 5.
+C. It prints numbers from 5 to 0.
+D. It prints an infinite loop.
+
+Correct: A
+
+136. What happens if the condition in a "while" loop is never true in C#?
+A. The program crashes.
+B. The program executes the loop indefinitely.
+C. The program exits the loop immediately.
+D. The program prints an error message.
+
+Correct: C
+
+137. How do you exit a "while" loop prematurely in C#?
+A. Use the "break" statement.
+B. Use the "continue" statement.
+C. Use the "return" statement.
+D. Use the "goto" statement.
+
+Correct: A
+
+138. What is the purpose of the "continue" statement in C#?
+A. To declare variables
+B. To exit a loop prematurely
+C. To skip the rest of the current iteration and continue with the next one
+D. To perform mathematical calculations
+
+Correct: C
+
+139. What is an infinite loop in C#?
+A. A loop that repeats a fixed number of times
+B. A loop that never terminates because its condition is always true
+C. A loop that prints numbers in ascending order
+D. A loop that prints numbers in descending order
+
+Correct: B
+
+140. What is the purpose of the "for" loop in C#?
+A. To declare variables
+B. To repeat a block of code while a condition is true
+C. To conditionally execute code based on the value of an expression
+D. To perform mathematical calculations
+
+Correct: D
+
+**C# For Loop**
+
+141. What is the purpose of a "for" loop in C#?
+A. To declare variables
+B. To repeat a block of code while a condition is true
+C. To conditionally execute code based on the value of an expression
+D. To perform a fixed number of iterations
+
+Correct: D
+
+142. How do you write a "for" loop in C#?
+A. while (condition) { /* code to execute */ }
+B. do { /* code to execute */ } while (condition);
+C. for (initialization; condition; update) { /* code to execute */ }
+D. if (condition) { /* code to execute */ }
+
+Correct: C
+
+143. What is the purpose of the initialization section in a "for" loop in C#?
+A. To declare variables
+B. To repeat a block of code while a condition is true
+C. To specify the condition for terminating the loop
+D. To initialize a loop control variable
+
+Correct: D
+
+144. What is the purpose of the condition section in a "for" loop in C#?
+A. To declare variables
+B. To specify the condition for terminating the loop
+C. To initialize a loop control variable
+D. To repeat a block of code while a condition is true
+
+Correct: B
+
+145. What is the purpose of the update section in a "for" loop in C#?
+A. To declare variables
+B. To repeat a block of code while a condition is true
+C. To specify the condition for terminating the loop
+D. To update a loop control variable
+
+Correct: D
+
+146. What is the result of the following code in C#?
+-------------------------------------
+for (int i = 0; i < 5; i++)
+{
+ Console.WriteLine(i);
+}
+-------------------------------------
+A. It prints numbers from 0 to 4.
+B. It prints numbers from 1 to 5.
+C. It prints numbers from 5 to 0.
+D. It prints an infinite loop.
+
+Correct: A
+
+147. What happens if the condition in a "for" loop is never true in C#?
+A. The program crashes.
+B. The program executes the loop indefinitely.
+C. The program exits the loop immediately.
+D. The program prints an error message.
+
+Correct: C
+
+148. How do you exit a "for" loop prematurely in C#?
+A. Use the "break" statement.
+B. Use the "continue" statement.
+C. Use the "return" statement.
+D. Use the "goto" statement.
+
+Correct: A
+
+149. What is the purpose of the "continue" statement in C#?
+A. To declare variables
+B. To exit a loop prematurely
+C. To skip the rest of the current iteration and continue with the next one
+D. To perform mathematical calculations
+
+Correct: C
+
+150. What is an infinite loop in C#?
+A. A loop that repeats a fixed number of times
+B. A loop that never terminates because its condition is always true
+C. A loop that prints numbers in ascending order
+D. A loop that prints numbers in descending order
+
+Correct: B
+
+**C# Break/Continue**
+
+151. What is the purpose of the "break" statement in C#?
+A. To declare variables
+B. To exit a loop prematurely
+C. To skip the rest of the current iteration and continue with the next one
+D. To perform mathematical calculations
+
+Correct: B
+
+152. How do you use the "break" statement in a loop in C#?
+A. break;
+B. break (condition);
+C. break loop;
+D. break();
+
+Correct: A
+
+153. What is the purpose of the "continue" statement in C#?
+A. To declare variables
+B. To exit a loop prematurely
+C. To skip the rest of the current iteration and continue with the next one
+D. To perform mathematical calculations
+
+Correct: C
+
+154. How do you use the "continue" statement in a loop in C#?
+A. continue;
+B. continue (condition);
+C. continue loop;
+D. continue();
+
+Correct: A
+
+155. What is the result of the "break" statement in a loop in C#?
+A. It exits the loop immediately and continues with the next line of code after the loop.
+B. It exits the loop and terminates the program.
+C. It restarts the loop from the beginning.
+D. It has no effect on the loop.
+
+Correct: A
+
+156. What is the result of the "continue" statement in a loop in C#?
+A. It exits the loop immediately and continues with the next line of code after the loop.
+B. It exits the loop and terminates the program.
+C. It skips the rest of the current iteration and continues with the next iteration of the loop.
+D. It has no effect on the loop.
+
+Correct: C
+
+157. When is the "break" statement typically used in C#?
+A. To declare variables
+B. To exit a loop prematurely when a certain condition is met
+C. To skip the rest of the current iteration and continue with the next one
+D. To perform mathematical calculations
+
+Correct: B
+
+158. When is the "continue" statement typically used in C#?
+A. To declare variables
+B. To exit a loop prematurely when a certain condition is met
+C. To skip the rest of the current iteration and continue with the next one
+D. To perform mathematical calculations
+
+Correct: C
+
+159. What happens if you use the "break" statement outside of a loop in C#?
+A. It exits the program.
+B. It results in a compilation error.
+C. It has no effect.
+D. It skips the next line of code.
+
+Correct: B
+
+160. What happens if you use the "continue" statement outside of a loop in C#?
+A. It exits the program.
+B. It results in a compilation error.
+C. It has no effect.
+D. It skips the next line of code.
+
+Correct: B
+
+**C# Arrays**
+
+161. What is an array in C#?
+A. A single variable that can hold multiple values of different data types
+B. A collection of variables with the same data type
+C. A data type that represents text
+D. A data type that represents floating-point numbers
+
+Correct: B
+
+162. How do you declare an array in C#?
+A. int myArray;
+B. var myArray = [];
+C. int[] myArray;
+D. array myArray;
+
+Correct: C
+
+163. How do you initialize an array with values in C#?
+A. int[] myArray = [1, 2, 3];
+B. int[] myArray = {1, 2, 3};
+C. int[] myArray = new int[3];
+D. int myArray = {1, 2, 3};
+
+Correct: B
+
+164. How do you access an element in an array in C#?
+A. myArray[elementIndex]
+B. myArray[elementValue]
+C. myArray.elementAt(elementIndex)
+D. myArray.getIndex(elementIndex)
+
+Correct: A
+
+165. What is the index of the first element in an array in C#?
+A. 0
+B. 1
+C. -1
+D. The index depends on the length of the array.
+
+Correct: A
+
+166. What happens if you try to access an element in an array with an index that is out of bounds in C#?
+A. It results in a compilation error.
+B. It returns the value 0.
+C. It returns the last element of the array.
+D. It throws an "IndexOutOfRangeException" exception at runtime.
+
+Correct: D
+
+167. How do you find the length of an array in C#?
+A. myArray.size
+B. myArray.length
+C. myArray.Count
+D. myArray.Length
+
+Correct: D
+
+168. What is the purpose of the "foreach" loop in C#?
+A. To declare variables
+B. To exit a loop prematurely
+C. To iterate over the elements of an array or collection
+D. To perform mathematical calculations
+
+Correct: C
+
+169. How do you iterate over the elements of an array using a "foreach" loop in C#?
+A. foreach (element in myArray) { /* code to execute */ }
+B. foreach (var element in myArray) { /* code to execute */ }
+C. for (element in myArray) { /* code to execute */ }
+D. while (element in myArray) { /* code to execute */ }
+
+Correct: B
+
+170. What is a two-dimensional array in C#?
+A. An array with two elements
+B. An array that contains only two data types
+C. An array with two indexes, typically representing rows and columns
+D. An array with two dimensions, such as width and height
+
+Correct: C
+
+**C# Methods**
+
+171. What is a method in C#?
+A. A variable that holds data
+B. A collection of variables
+C. A block of code that performs a specific task
+D. A data type that represents text
+
+Correct: C
+
+172. How do you declare a method in C#?
+A. method myMethod() { /* code to execute */ }
+B. void myMethod() { /* code to execute */ }
+C. def myMethod() { /* code to execute */ }
+D. function myMethod() { /* code to execute */ }
+
+Correct: B
+
+173. What is the purpose of the "void" keyword in a method declaration in C#?
+A. To declare variables
+B. To specify the data type of the method's return value
+C. To indicate that the method does not return a value
+D. To perform mathematical calculations
+
+Correct: C
+
+174. How do you call (invoke) a method in C#?
+A. methodName();
+B. myMethod();
+C. callMethod(methodName);
+D. method(myMethod);
+
+Correct: B
+
+175. What is a parameter in the context of a method in C#?
+A. A variable that holds data
+B. A collection of variables
+C. An input value that is passed to the method
+D. An output value that the method returns
+
+Correct: C
+
+176. How do you define parameters in a method declaration in C#?
+A. parameters(param1, param2)
+B. void method(param1, param2) { /* code to execute */ }
+C. void method(param1, param2);
+D. method(void param1, void param2) { /* code to execute */ }
+
+Correct: B
+
+177. What is the purpose of the "return" statement in a method in C#?
+A. To declare variables
+B. To exit a loop prematurely
+C. To specify the data type of the method's return value
+D. To return a value from the method to the caller
+
+Correct: D
+
+178. What is the return type of a method that does not return any value in C#?
+A. int
+B. string
+C. void
+D. bool
+
+Correct: C
+
+179. What is a method signature in C#?
+A. The method's name and return type
+B. The method's name and parameters
+C. The method's access modifier and return type
+D. The method's access modifier and parameters
+
+Correct: B
+
+180. How do you make a method accessible from outside its containing class in C#?
+A. By using the "private" access modifier
+B. By using the "protected" access modifier
+C. By using the "internal" access modifier
+D. By using the "public" access modifier
+
+Correct: D
+
+**C# Method Parameters**
+
+181. What is a method parameter in C#?
+A. A variable that holds data
+B. A collection of variables
+C. An input value that is passed to the method
+D. An output value that the method returns
+
+Correct: C
+
+182. How do you specify method parameters in a method declaration in C#?
+A. parameters(param1, param2)
+B. void method(param1, param2) { /* code to execute */ }
+C. void method(param1, param2);
+D. method(void param1, void param2) { /* code to execute */ }
+
+Correct: B
+
+183. What is the purpose of method parameters in C#?
+A. To specify the data type of the method's return value
+B. To declare variables
+C. To define the method's name
+D. To provide input values to the method
+
+Correct: D
+
+184. How do you pass arguments to a method when calling it in C#?
+A. By specifying the argument values in the method declaration
+B. By enclosing the argument values in square brackets
+C. By specifying the argument values within parentheses
+D. By using the "return" keyword
+
+Correct: C
+
+185. What is the difference between a method parameter and an argument in C#?
+A. There is no difference; the terms are interchangeable.
+B. A method parameter is used when declaring a method, while an argument is used when calling the method.
+C. A method parameter is passed to a method, while an argument is a value received by the method.
+D. A method parameter is optional, while an argument is required.
+
+Correct: B
+
+186. What is a default parameter value in C#?
+A. A parameter that is always set to the value 0
+B. A parameter that is automatically assigned a value if no argument is provided when calling the method
+C. A parameter that is inaccessible from outside the method
+D. A parameter that is required for the method to compile
+
+Correct: B
+
+187. How do you define a default parameter value in a method declaration in C#?
+A. By using the "default" keyword
+B. By assigning a value to the parameter in the method declaration
+C. By enclosing the parameter name in square brackets
+D. By using the "optional" keyword
+
+Correct: B
+
+188. Can a method have both parameters with default values and parameters without default values in C#?
+A. Yes, but all parameters must have default values.
+B. Yes, but only the first parameter can have a default value.
+C. No, all parameters must have the same type and no default values.
+D. No, methods with default parameters are not allowed.
+
+Correct: A
+
+189. What is method overloading in C#?
+A. A technique for defining multiple methods with the same name but different return types
+B. A technique for defining multiple methods with the same name but different access modifiers
+C. A technique for defining multiple methods with the same name but different parameter lists
+D. A technique for defining multiple methods with the same name but the same parameter list
+
+Correct: C
+
+190. How is method overloading achieved in C#?
+A. By using the "override" keyword
+B. By using the "new" keyword
+C. By defining multiple methods with the same name but different parameter types or numbers
+D. By using the "base" keyword
+
+Correct: C
+
+**C# Method Overloading**
+
+191. What is method overloading in C#?
+A. A technique for defining multiple methods with the same name but different return types
+B. A technique for defining multiple methods with the same name but different access modifiers
+C. A technique for defining multiple methods with the same name but different parameter lists
+D. A technique for defining multiple methods with the same name but the same parameter list
+
+Correct: C
+
+192. How is method overloading achieved in C#?
+A. By using the "override" keyword
+B. By using the "new" keyword
+C. By defining multiple methods with the same name but different parameter types or numbers
+D. By using the "base" keyword
+
+Correct: C
+
+193. Can methods with the same name but different return types be considered overloaded in C#?
+A. Yes, as long as the parameter lists are the same.
+B. Yes, as long as the access modifiers are the same.
+C. No, methods with different return types cannot be overloaded.
+D. No, overloading is not allowed in C#.
+
+Correct: C
+
+194. Can methods with the same name but different access modifiers be considered overloaded in C#?
+A. Yes, as long as the parameter lists are the same.
+B. Yes, as long as the return types are the same.
+C. No, methods with different access modifiers cannot be overloaded.
+D. No, overloading is not allowed in C#.
+
+Correct: C
+
+195. What is the significance of method overloading in C#?
+A. It allows multiple methods with the same name to be defined in a class.
+B. It allows a method to have multiple return types.
+C. It simplifies method declarations by allowing fewer parameters.
+D. It enforces a specific order in which methods are executed.
+
+Correct: A
+
+196. How does C# determine which overloaded method to call when a method is invoked?
+A. By looking at the method's access modifier
+B. By looking at the method's return type
+C. By matching the method's parameter list with the arguments provided
+D. By alphabetical order of method names
+
+Correct: C
+
+197. What is the purpose of method overloading in C#?
+A. To confuse programmers by allowing multiple methods with the same name
+B. To provide multiple ways to call a method with different parameter combinations
+C. To reduce code complexity by using fewer methods with many parameters
+D. To enforce strict type checking in method calls
+
+Correct: B
+
+198. Can method overloading be based solely on differences in parameter names in C#?
+A. Yes, parameter names are the only criteria for overloading.
+B. Yes, parameter names and parameter types must be different.
+C. No, parameter names cannot be used for overloading.
+D. No, overloading is not allowed in C#.
+
+Correct: C
+
+199. What happens if two overloaded methods have the same parameter types in C#?
+A. It results in a compilation error.
+B. The method with the same parameter types that was declared first is called.
+C. The method with the same parameter types that was declared last is called.
+D. It depends on the method's access modifier.
+
+Correct: A
+
+200. Which of the following is a valid example of method overloading in C#?
+A. int CalculateSum(int a, int b)
+int CalculateSum(int x, int y)
+B. int CalculateSum(int a, int b)
+double CalculateSum(int a, int b)
+C. int CalculateSum(int a, int b)
+int CalculateProduct(int a, int b)
+D. int CalculateSum(int a, double b)
+int CalculateSum(double a, int b)
+
 Correct: A
