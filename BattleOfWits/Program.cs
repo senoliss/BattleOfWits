@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 
 namespace BattleOfWits
@@ -12,8 +14,8 @@ namespace BattleOfWits
             Console.BackgroundColor = ConsoleColor.DarkGray;
             // using ForegroundColor property
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetWindowSize(60, 30);
-            Console.SetBufferSize(60, 40);
+            Console.SetWindowSize(60, 40);
+            Console.SetBufferSize(60, 50);
             Console.Title = "Battle Of Wits";
 
             // Variables
@@ -26,6 +28,7 @@ namespace BattleOfWits
             string gameLoader2 = "==";
             string gameLoader3 = "                    ";
             (string Name, string Surname) = ("", "");
+            (string Name2, string Surname2) = ("", "");
             int score = 0;
             Dictionary<string, string> players = new Dictionary<string, string>();
             Dictionary<string, int> playersScore = new Dictionary<string, int>();
@@ -33,27 +36,17 @@ namespace BattleOfWits
             Dictionary<int, string> answers = new Dictionary<int, string>();
             List<string[]> questions = new List<string[]>();
 
-            (questions, answers) = ReadQuestionsFromFile(filePath);
-            Shuffle(questions);
+            (questions, answers) = ReadQuestionsFromFile(filePath);                     // Reads all the questions from Questions.txt file and formats them into printable array of strings, collects the answers and puts them into the dictionary in which key resembles test questuion and value an answer.
+            Shuffle(questions);                                                         // Since the questions are read from 1 till 2oo this method shuffles the array of strings so that the questions could be randomized.
 
-            printWelcome();
+            //printWelcome(players);                                                      // Prints first welcome message with empty users as a title to the game. Parameter players is a dictionary of logged in players.
 
-            // Login Window
-            foreach (var items in questions)
-            {
-                foreach (var item in items)
-                {
-                    Console.WriteLine(item.ToString());
-                }
-            }
-            for (int i = 0; i < questions.Count; i++)
-            {
-                Console.WriteLine(questions[i].ToString());
-            }
-            Console.ReadLine();
-            (Name, Surname) = logIn(Name, Surname, playerExists);
-            // Add player
-            players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
+            //printQuestions(questions);
+
+            //// Login Window
+            //(Name, Surname) = logIn(Name, Surname, playerExists);
+            //// Add player
+            //players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
             Thread.Sleep(1000);
             Console.Clear();
 
@@ -63,9 +56,9 @@ namespace BattleOfWits
                 for (int i = 0; i <= 10; i++)
                 {
                     // Writing the welcome message until login
-                    printWelcome();
+                    printWelcome(players);
                     // Writing the Rules
-                    printRules(Name, Surname);
+                    printRules();
                     Console.WriteLine("----------------------------------------------------------");
                     Console.WriteLine("Loading the game " + i * 10 + "% [" + gameLoader + gameLoader3 + "]");
                     Console.WriteLine("----------------------------------------------------------");
@@ -82,98 +75,62 @@ namespace BattleOfWits
                 Thread.Sleep(1000);
                 Console.Clear();
 
-                if (!playerExists)
-                {
-                    // Login Window
-                    (Name, Surname) = logIn(Name, Surname, playerExists);
-                    // Add player
-                    players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
-                    Thread.Sleep(1000);
-                    Console.Clear();
-                }
+                //if (!playerExists)
+                //{
+                //    // Login Window
+                //    (Name, Surname) = logIn(Name, Surname, playerExists);
+                //    // Add player
+                //    players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
+                //    Thread.Sleep(1000);
+                //    Console.Clear();
+                //}
 
                 while (gameRuns)
                 {
                     Console.Clear();
                     // Writing the welcome message until login
-                    printWelcome();
-                    menuChoice = printMenu(Name, Surname);
+                    printWelcome(players);
+                    menuChoice = printMenu();
                     switch (menuChoice)
                     {
-                        case "1":
-                            (Name, Surname) = logIn(Name, Surname, playerExists);
-                            //if (!playerExists)
-                            //{
-                            //    // Login Window
-                            //    (Name, Surname) = logIn(Name, Surname, playerExists);
-                            //    // Add player
-                            //    players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
-                            //    Console.WriteLine("Ran");
-                            //}
-                            //else
-                            //{
-                            //    Console.WriteLine("Do you want to see rules and your hiscore again? y/n:");
-                            //    var answer = Console.ReadKey().Key;
-                            //    Thread.Sleep(1000);
-                            //    Console.Clear();
-                            //    if (answer == ConsoleKey.Y)
-                            //    {
-                            //        printRules(Name, Surname);
-                            //        Console.WriteLine();
-                            //        Console.WriteLine("--Press anything to continue--");
-                            //        Console.ReadKey();
-                            //        Thread.Sleep(1000);
-                            //        Console.Clear();
-                            //    }
-                            //}
+                        case "1":                                                   // Log-In
                             Console.WriteLine("Chose 1");
+                            logIn(ref players, ref playerExists);
                             Thread.Sleep(1000);
                             Console.Clear();
-                            //logIn(Name, Surname, playerExists);
                             break;
-                        case "2":
+                        case "2":                                                   // Log-Out
                             Console.WriteLine("Chose 2");
                             Thread.Sleep(1000);
-                            Console.Clear();
-                            if (!playerExists)
-                            {
-                                Console.WriteLine("There's no Logged In User at the moment!");
-                                Thread.Sleep(1000);
-                            }
-                            if (playerExists)
-                            {
-                                (Name, Surname) = logOut();
-                                playerExists = false;
-                                Console.WriteLine("User has been cleared!");
-                            }
+                            logOut(ref players, ref playerExists); // uzmest ref players dict ir pakeist kad tikrintu jei bent vienas zaidejas yra kad playerexists true
                             Thread.Sleep(1000);
                             Console.Clear();
                             break;
-                        case "3":
+                        case "3":                                                   // Print Rules
                             Console.WriteLine("Chose 3");
                             Thread.Sleep(1000);
                             Console.Clear();
-                            printWelcome();
-                            printRules(Name, Surname);
+                            printWelcome(players);
+                            printRules();
                             var key = Console.ReadKey().Key;
                             do
                             {
                                 Thread.Sleep(1000);
                                 Console.Clear();
-                                printWelcome();
-                                printRules(Name, Surname);
+                                printWelcome(players);
+                                printRules();
                                 key = Console.ReadKey().Key;
                             }
                             while (key != ConsoleKey.Q);
                             if (key == ConsoleKey.Q)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Redirecting to MENU...");
+                                Console.WriteLine("Now, merrily waltzing to the MENU...");
                                 Thread.Sleep(1000);
                                 break;
                             }
                             break;
-                        case "4":
+                        case "4":                                                   // Print Hiscores
                             Console.WriteLine("Chose 4");
                             Thread.Sleep(1000);
                             Console.Clear();
@@ -181,7 +138,7 @@ namespace BattleOfWits
                             {
                                 Thread.Sleep(1000);
                                 Console.Clear();
-                                printWelcome();
+                                printWelcome(players);
                                 printHiscores(playersScore, playerExists);
                                 key = Console.ReadKey().Key;
                             }
@@ -189,180 +146,119 @@ namespace BattleOfWits
                             if (key == ConsoleKey.Q)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Redirecting to MENU...");
+                                Console.WriteLine("Now, merrily waltzing to the MENU...");
                                 Thread.Sleep(1000);
                                 break;
                             }
                             break;
-                        case "5":
+                        case "5":                                                   // Begin the Game
                             Console.WriteLine("Chose 5");
                             Thread.Sleep(1000);
                             Console.Clear();
-                            do
+                            if (!playerExists)
                             {
-                                if (!playerExists)
-                                {
-                                    Console.WriteLine("There's no Logged In User at the moment!");
-                                    Thread.Sleep(1000);
-                                }
-                                if (playerExists)
-                                {
-                                    answersInput = printQuestions(questions);
-                                    score = checkAnswers(answersInput, answers);
-                                    playersScore = saveScores(Name, Surname, score, true);
-                                }
+                                printWelcome(players);
                                 Console.WriteLine("----------------------------------------------------------");
-                                Console.WriteLine("Press any key to continue or 'q' to quit to MENU:");
-                                key = Console.ReadKey().Key;
-                                if (key == ConsoleKey.Q)
-                                {
-                                    Console.WriteLine();
-                                    Console.WriteLine("Redirecting to MENU...");
-                                    Thread.Sleep(1000);
-                                    break;
-                                }
+                                Console.WriteLine("Alas, there's nary a Logged In User at this present moment!");
+                                Console.WriteLine("Now, merrily waltzing to the MENU...");
+                                Thread.Sleep(2000);
                             }
-                            while (key != ConsoleKey.Q);
-                            Thread.Sleep(1000);
-                            Console.Clear();
+                            if (playerExists)
+                            {
+                                playGame(questions, players, ref playersScore, answers);
+                            }
+
                             break;
-                        case "6":
-                            Console.WriteLine("Chose 5");
+                        case "6":                                                   // Quit the Game((console)
+                            Console.WriteLine("Chose 6");
                             Thread.Sleep(1000);
                             Console.Clear();
-                            printMenu(Name, Surname);
+                            printWelcome(players);
+                            Console.WriteLine("----------------------------------------------------------");
+                            Console.WriteLine("Thank you for participating in BATTLE OF WITS!");
+                            Console.WriteLine("Saving and exiting the game...");
+                            Thread.Sleep(3000);
+                            Environment.Exit(0);
                             break;
                         default:
-                            Console.WriteLine("My buddy, a wrong choice you've made here!");
-                            Thread.Sleep(1000);
-
-
-
-                            //while (!playerExists)
-                            //{
-                            //    // Login Window
-                            //    (Name, Surname) = logIn(Name, Surname, playerExists);
-                            //    // Add player
-                            //    players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
-
-                            //}
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Aha, thou hast taken quite the amusing detour here!");
+                            Thread.Sleep(1500);
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.Clear();
                             break;
                     }
                 }
             }
-
-            // Init the game
-            while (gameRuns)
-            {
-                menuChoice = printMenu(Name, Surname);
-                switch (menuChoice)
-                {
-                    case "1":
-                        (Name, Surname) = logIn(Name, Surname, playerExists);
-                        //if (playerExists)
-                        //{
-                        //    // Login Window
-
-                        //    // Add player
-                        //    players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
-                        //    Console.WriteLine("Ran");
-                        //}
-                        //else
-                        //{
-                        //    Console.WriteLine("Do you want to see rules and your hiscore again? y/n:");
-                        //    var answer = Console.ReadKey().Key;
-                        //    Thread.Sleep(1000);
-                        //    Console.Clear();
-                        //    if (answer == ConsoleKey.Y)
-                        //    {
-                        //        printRules(Name, Surname);
-                        //        Console.WriteLine();
-                        //        Console.WriteLine("--Press anything to continue--");
-                        //        Console.ReadKey();
-                        //        Thread.Sleep(1000);
-                        //        Console.Clear();
-                        //    }
-                        //}
-                        Console.WriteLine("Chose 1");
-                        Thread.Sleep(1000);
-                        Console.Clear();
-                        //logIn(Name, Surname, playerExists);
-                        break;
-                    case "2":
-                        Console.WriteLine("Chose 2");
-                        Thread.Sleep(1000);
-                        Console.Clear();
-                        logOut();
-                        break;
-                    case "3":
-                        Console.WriteLine("Chose 3");
-                        Thread.Sleep(1000);
-                        Console.Clear();
-                        printRules(Name, Surname);
-                        break;
-                    case "4":
-                        Console.WriteLine("Chose 4");
-                        Thread.Sleep(1000);
-                        Console.Clear();
-                        printMenu(Name, Surname);
-                        break;
-                    case "5":
-                        Console.WriteLine("Chose 5");
-                        Thread.Sleep(1000);
-                        Console.Clear();
-                        printMenu(Name, Surname);
-                        break;
-                    default:
-                        Console.WriteLine("My buddy, a wrong choice you've made here!");
-                        break;
-                }
-            }
-            Console.ReadKey();
         }
 
-        public static void printWelcome()
+        public static void printWelcome(Dictionary<string, string> players)
         {
+            (string Name, string Surname) = ("", "");
+            (string Name2, string Surname2) = ("", "");
+
+            foreach (var player in players)
+            {
+                if (string.IsNullOrEmpty(Name))
+                {
+                    Name = player.Key;
+                    Surname = player.Value;
+                }
+                else
+                {
+                    Name2 = player.Key;
+                    Surname2 = player.Value;
+                }
+            }
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("++++++++++++++++++++++++BRAINUS+++++++++++++++++++++++++++");
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("                 WELCOME TO THE BRAINUS! " +
                 "\n       A BATTLE OF WITS WHERE FASTEST NEURONS CLASHES, " +
                 "\n     MIGHTIEST REFLEXES SURPASS AND SHARPEST MINDS WINS!");
-        }
-        public static void printRules(string Name, string Surname)
-        {
             Console.WriteLine("----------------------------------------------------------");
-            Console.Write($"                      SET OF RULES:        U:");
+            Console.Write($"User1:");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{Name} {Surname}");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"User2:");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"{Name2} {Surname2}");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        public static void printRules()
+        {
+            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine($"                      SET OF RULES:");
+            //Console.ForegroundColor = ConsoleColor.Green;
+            //Console.WriteLine($"{Name} {Surname}");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("1. ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("User has to use credentials to participate in " +
-                "\ngame (Name & Surname)");
+            Console.WriteLine("The User must wield their credentials to partake " +
+                "\n in the game (Name & Surname).");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("2. ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("User can use MENU freely and at any point of " +
-                "\ninput in game can exit to MENU by typing 'q'");
+            Console.WriteLine("The User can gallivant freely to YONDER MENU and," +
+                "\n at any point, can escape to the MENU by uttering 'q'.");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("3. ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("User can play the game in SOLO mode for practice.");
+            Console.WriteLine("SOLO play? Simply loggeth in once and off thou goest!");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("4. ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("For DUEL mode another user can be Logged In " +
-                "\nby chosing LogIn for the second time!");
+            Console.WriteLine("For the boisterous DUEL mode, a second user " +
+                "\nmay be summoned by choosing LogIn for the second time!");
 
         }
-        public static string printMenu(string Name, string Surname)
+        public static string printMenu()
         {
             Console.WriteLine("----------------------------------------------------------");
-            Console.Write("                         MENU:        U:");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{Name} {Surname}");
+            Console.WriteLine("                         MENU:");
+            //Console.ForegroundColor = ConsoleColor.Green;
+            //Console.WriteLine($"{Name} {Surname}");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("1. ");
             Console.ForegroundColor = ConsoleColor.White;
@@ -391,47 +287,204 @@ namespace BattleOfWits
             string key = Console.ReadLine();
             return key;
         }
-        public static (string, string) logIn(string Name, string Surname, bool playerExists)
+        public static void logIn(ref Dictionary<string, string> players, ref bool playerExists)
         {
+            (string Name, string Surname) = ("", "");
+            (string Name2, string Surname2) = ("", "");
+            string key = "";
+            foreach (var player in players)
+            {
+                if (string.IsNullOrEmpty(Name))
+                {
+                    Name = player.Key;
+                    Surname = player.Value;
+                }
+                else
+                {
+                    Name2 = player.Key;
+                    Surname2 = player.Value;
+                }
+            }
+            Console.Clear();
+            printWelcome(players);
+            Console.WriteLine("----------------------------------------------------------");
             if (playerExists)
             {
-                Console.WriteLine("----------------------------------------------------------");
-                Console.WriteLine($"Player already exists {Name} {Surname}!");
-                Console.WriteLine("1. Add second player!");
-                Console.WriteLine("2. Review rules.");
-                Console.Write("Choose your action : ");
-                string key = Console.ReadLine();
-                switch (key)
+                if (players.Count > 0 && players.Count < 2)
                 {
-                    case "1":
-                        playerExists = false;
-                        break;
-                    case "2":
-                        printRules(Name, Surname);
-                        break;
-                    default:
-                        Console.WriteLine("Aha");
-                        break;
+                    Console.Write($"Oopsie-doodle! That player already resides here: ");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine($"{Name} {Surname}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("1. Ahoy, we needeth a second player, posthaste!");
+                    Console.WriteLine("2. Time to revieweth the quirky rules, my friend.");
+                    Console.Write("Choose thy mirthful course of action: ");
+                    key = Console.ReadLine();
+                    switch (key)
+                    {
+                        case "1":
+                            playerExists = false;
+                            break;
+                        case "2":
+                            printRules();
+                            break;
+                        case "q":
+                            Console.WriteLine("Now, merrily waltzing to the MENU...");
+                            Thread.Sleep(1000);
+                            break;
+                        default:
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Aha, thou hast taken quite the amusing detour here!");
+                            Thread.Sleep(1500);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            logIn(ref players, ref playerExists);
+                            break;
+                    }
                 }
-
+                else
+                {
+                    Console.WriteLine("Oh dear, both player spots art already occupied! How peculiar!");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"{Name} {Surname}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" & ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write($"{Name2} {Surname2}\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("1. Time to revieweth the quirky rules, my friend.");
+                    Console.WriteLine("2. Waltz to MENU.");
+                    key = Console.ReadLine();
+                    switch (key)
+                    {
+                        case "1":
+                            Console.Clear();
+                            printWelcome(players);
+                            printRules();
+                            Thread.Sleep(3000);
+                            break;
+                        case "2" or "q":
+                            Console.WriteLine("Now, merrily waltzing to the MENU...");
+                            Thread.Sleep(1000);
+                            break;
+                        default:
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Aha, thou hast taken quite the amusing detour here!");
+                            Thread.Sleep(1500);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            logIn(ref players, ref playerExists);
+                            break;
+                    }
+                }
             }
 
             if (!playerExists)
             {
-                Console.WriteLine("----------------------------------------------------------");
-                Console.WriteLine("Let us Log you In to the game! ");
-                Console.Write("How thee are calling you? ");
+                Console.WriteLine("Let us embark on a whimsical journey " +
+                    "\ninto the realm of the game!");
+                Console.WriteLine();
+                Console.WriteLine("Pray, what shall we dub thee, noble player?");
                 Name = Console.ReadLine();
-                Console.Write("How thee are calling your family? ");
+                Name = char.ToUpper(Name[0]) + Name.Substring(1).ToLower();
+                Console.WriteLine("How dost thou address thy kinsfolk " +
+                    "\nin this merry adventure?");
                 Surname = Console.ReadLine();
+                Surname = char.ToUpper(Surname[0]) + Surname.Substring(1).ToLower();
+                players = AddOrUpdatePlayer(players, Name, Surname, out playerExists);
             }
-
-            return (Name, Surname);
         }
-        public static (string, string) logOut()
+        public static void logOut(ref Dictionary<string, string> players, ref bool playerExists)
         {
             (string Name, string Surname) = ("", "");
-            return (Name, Surname);
+            (string Name2, string Surname2) = ("", "");
+            foreach (var player in players)
+            {
+                if (string.IsNullOrEmpty(Name))
+                {
+                    Name = player.Key;
+                    Surname = player.Value;
+                }
+                else
+                {
+                    Name2 = player.Key;
+                    Surname2 = player.Value;
+                }
+            }
+            Console.Clear();
+            printWelcome(players);
+            Console.WriteLine("----------------------------------------------------------");
+
+            if (players.Count == 0)
+            {
+                Console.WriteLine("Lo and behold, there's nary a Logged In User at this present moment!");
+                Console.WriteLine("Now, merrily waltzing to the MENU...");
+                Thread.Sleep(1000);
+            }
+
+            if (players.Count == 1)
+            {
+                Console.WriteLine("Only one gallant player hath ventured forth into this quest, verily.");
+                Console.Write("1. ");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"{Name} {Surname}");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Dost thou truly desire to part company? Yay or nay:");
+                string key = Console.ReadLine().ToLower();
+                switch (key)
+                {
+                    case "y" or "yay":
+                        Console.WriteLine($"User {{{Name} {Surname}}} has been cleared from the stage!!");
+                        players.Remove(Name);
+                        playerExists = false;
+                        Console.WriteLine("Now, merrily waltzing to the MENU...");
+                        Thread.Sleep(1000);
+                        break;
+                    case "n" or "q" or "nay":
+                        Console.WriteLine("Alas, the User hath not been cleared! What merriment!");
+                        Console.WriteLine("Now, merrily waltzing to the MENU...");
+                        Thread.Sleep(1000);
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("Aha, thou hast taken quite the amusing detour here!");
+                        Thread.Sleep(1500);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        logOut(ref players, ref playerExists);
+                        break;
+                }
+            }
+
+            if (players.Count > 1)
+            {
+                Console.WriteLine("Which player shall we jettison, or, in simpler terms, clear/logout?");
+                Console.Write("1. ");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"{Name} {Surname}");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("2. ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine($"{Name2} {Surname2}");
+                Console.ForegroundColor = ConsoleColor.White;
+                string key = Console.ReadLine();
+                switch (key)
+                {
+                    case "1":
+                        players.Remove(Name);
+                        Console.WriteLine($"User {{{Name} {Surname}}} hath been cleared from the stage!");
+                        break;
+                    case "2":
+                        players.Remove(Name2);
+                        Console.WriteLine($"User {{{Name2} {Surname2}}} hath been cleared from the stage!");
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("Aha, thou hast taken quite the amusing detour here!");
+                        Thread.Sleep(1500);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        logOut(ref players, ref playerExists);
+                        break;
+                }
+            }
+
         }
         public static Dictionary<string, string> AddOrUpdatePlayer(Dictionary<string, string> players, string Name, string Surname, out bool playerExists)
         {
@@ -439,41 +492,48 @@ namespace BattleOfWits
             if (players.ContainsKey(Name))
             {
                 // Player already exists, update the info.
-                Console.WriteLine($"Player {{{Name} {players[Name]}}} already exists in our hiscores!");
+                Console.WriteLine($"Player {{{Name} {players[Name]}}} hath already etched their name into our peculiar hiscores!");
             }
-            // Add a new player.
-            players.Add(Name, Surname);
-            Console.WriteLine($"Great new player {{{Name} {players[Name]}}} was added to the game " +
-                $"\nboard and can now participate");
-
+            else if (!players.ContainsKey(Name))
+            {
+                // Add a new player.
+                players.Add(Name, Surname);
+                Console.WriteLine($"Huzzah! A great new player, {{{Name} {players[Name]}}}, " +
+                    $"\nhath emerged to grace our game board " +
+                    $"\nand partake in the festivities!");
+            }
             playerExists = true;
             return players;
         }
-        public static Dictionary<string, int> saveScores(string Name, string Surname, int score, bool saveOrPrint)
+        public static void saveScores(ref Dictionary<string, int> playersScore, Dictionary<string, string> players, int score, string playerName)
         {
-            Dictionary<string, int> playersScore = new Dictionary<string, int>();
-            string fullName = Name + " " + Surname;
+            string fullName = "";
+
+            foreach (var player in players)
+            {
+                if (player.Key == playerName)
+                {
+                    fullName = player.Key + " " + player.Value;
+                }
+            }
 
             if (playersScore.TryGetValue(fullName, out int scoreOld))
             {
                 scoreOld += score;
-                playersScore.Add(fullName, scoreOld);
+                playersScore[fullName] += scoreOld;
             }
-            playersScore.Add(fullName, score);
-
-            if (!saveOrPrint)
+            else
             {
-                // print score
+                playersScore.Add(fullName, score);
             }
-            return playersScore;
         }
 
         public static void printHiscores(Dictionary<string, int> players, bool playerExists)
         {
+            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine($"                      HISCORES:");
             if (playerExists)
             {
-                Console.WriteLine("----------------------------------------------------------");
-                Console.Write($"                      HISCORES:");
                 int i = 1;
                 foreach (var kvp in players)
                 {
@@ -483,8 +543,12 @@ namespace BattleOfWits
                 }
                 if (players.Count == 0)
                 {
-                    Console.WriteLine("\nThere are no players that have participated \nin the Battle of Wits game yet!");
+                    Console.WriteLine("\nThere art no players who hath joined the whimsical fray known as the Battle of Wits!");
                 }
+            }
+            if (!playerExists)
+            {
+                Console.WriteLine("Only Registered members can behold the legendary wall of Legends!");
             }
         }
 
@@ -539,48 +603,151 @@ namespace BattleOfWits
         }
 
         // A separate method to print questions not in Main method
-        public static Dictionary<int, string> printQuestions(List<string[]> list)
+        public static void playGame(List<string[]> list, Dictionary<string, string> players, ref Dictionary<string, int> playersScore, Dictionary<int, string> answers)
         {
             Dictionary<int, string> answersInput = new Dictionary<int, string>();
+            Dictionary<string, int> tempScores = new Dictionary<string, int>(); // a dict to keep track of points after each session and maybe in future to keep track in txt file
             int qNum = 0;
-            string qLet;
-            int i = 0;
+            string qLet = null;
+            int i = 1;
+            int initQuestions = 3;
+            int score = 0;
+            string[] temp = null;
+            string tempName = null;
             foreach (var items in list)
             {
                 Console.Clear();
-                printWelcome();
+                printWelcome(players);
                 Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine($"Question: {i}/{initQuestions}");
+                Console.WriteLine("----------------------------------------------------------");
+
                 foreach (var item in items)
                 {
-
                     if (char.IsDigit(item[0]))
                     {
                         qNum = Convert.ToInt32(item.Split('.')[0]);
                     }
-
                     Console.WriteLine(item.ToString());
+                    temp = items;
                 }
-                Console.WriteLine();
-                Console.Write("Your answer: ");
-                qLet = Console.ReadLine().ToUpper();
 
-                if (qLet != "A" && qLet != "B" && qLet != "C" && qLet != "D")
+                foreach (var player in players)
                 {
-                    do
+                    tempName = player.Key + " " + player.Value;
+                    if (!tempScores.ContainsKey(tempName))
                     {
-                        Console.WriteLine("WRONG INPUT!");
-                        Console.Write("Your answer: ");
-                        qLet = Console.ReadLine().ToUpper();
+                        tempScores.Add(tempName, score);     // adds the player dict pair and their score to temp dict for trACKING
                     }
-                    while (qLet != "A" && qLet != "B" && qLet != "C" && qLet != "D");
+
+                    answersInput.Clear();
+                    score = 0;
+                    Console.WriteLine();
+                    Console.Write($"Player {player.Key} {player.Value} answer: ");
+                    qLet = Console.ReadLine().ToUpper();
+
+                    if (qLet != "A" && qLet != "B" && qLet != "C" && qLet != "D")
+                    {
+                        do
+                        {
+                            Console.WriteLine("WRONG INPUT! Thou art quite the jester!");
+                            Console.Write("Pray tell, what be thy answer? ");
+                            qLet = Console.ReadLine().ToUpper();
+                        }
+                        while (qLet != "A" && qLet != "B" && qLet != "C" && qLet != "D");
+                    }
+                    answersInput.Add(qNum, qLet);
+                    Console.WriteLine($"We thank thee, {player.Key} {player.Value}, forsooth! " +
+                        $"\nThy answer {qLet} for question {qNum} hath been dutifully noted!");
+                    score = checkAnswers(answersInput, answers);
+                    tempScores[tempName] += score;   // updates the score for each player after a question
+                    saveScores(ref playersScore, players, score, player.Key);
+                    Thread.Sleep(3000);
                 }
-                answersInput.Add(qNum, qLet);
-                Console.WriteLine($"Thank you your answer {qLet} for question {qNum} is registered! \nLoading next...");
-                Thread.Sleep(4000);
+
+                // clears console and prints again the same question after 1 or both players input answers but with higlighted text on answer.
+                Console.Clear();
+                printWelcome(players);
+                Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine($"Question: {i}/{initQuestions}");
+                Console.WriteLine("----------------------------------------------------------");
+                foreach (var line in temp)
+                {
+                    if (line.StartsWith(answers[qNum]))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(line);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
+                Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine($"Lo and behold! The correct answer for question {qNum} was: {answers[qNum]}");
+
+                // Loader sentence for next question, and to give time to compile answer.
+                if (i < initQuestions)  // Load while not reached last question
+                {
+                    Console.Write("\nLoading the next enigmatic query, anon.");
+                    for (int l = 0; l < 5; l++)
+                    {
+                        Console.Write(".");
+                        Thread.Sleep(1000);
+                    }
+                }
                 i++;
-                if (i == 2) break;
+                // when the questions end
+                if (i > initQuestions)          // initQuestions => How many questions
+                {
+                    i = 1;
+
+                    Console.WriteLine("----------------------------------------------------------");
+                    Console.WriteLine("This session hath come to a close, dear friend! " +
+                        "\nTotal points for this session: ");
+                    foreach (var item in tempScores)
+                    {
+                        Console.WriteLine($"Player {item.Key} earned {item.Value} points");
+                    }
+
+                    Console.WriteLine("\nDost thou yearn to playeth again (y) or taketh thy leave to the YONDER MENU (q)?");
+                    string decision = Console.ReadLine().ToUpper();
+                    if (decision == "Y")
+                    {
+                        Shuffle(list);
+                        playGame(list, players, ref playersScore, answers);
+                    }
+                    if (decision == "Q")
+                    {
+                        Console.WriteLine("Now, merrily waltzing to the MENU...");
+                        Thread.Sleep(3000);
+                        break;
+                    }
+                    while (true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("WRONG INPUT! Thou art quite the jester!");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("Playeth again (y) or depart to the YONDER MENU (q):");
+
+                        decision = Console.ReadLine().ToUpper();
+                        if (decision == "Y")
+                        {
+                            Shuffle(list);
+                            playGame(list, players, ref playersScore, answers);
+                        }
+                        if (decision == "Q")
+                        {
+                            Console.WriteLine("Now, merrily waltzing to the MENU...");
+                            Thread.Sleep(3000);
+                            break;
+                        }
+                    }
+                    break;
+                }
+
             }
-            return answersInput;
         }
 
         public static int checkAnswers(Dictionary<int, string> answersInput, Dictionary<int, string> answers)
@@ -597,12 +764,12 @@ namespace BattleOfWits
                 {
                     if (actualAnswer != expectedAnswer)
                     {
-                        Console.WriteLine($"Question {questionNumber}: Incorrect Answer ok: {answers[questionNumber]}, nok: {answersInput[questionNumber]}");
+                        //Console.WriteLine($"Question {questionNumber}: Incorrect Answer ok: {answers[questionNumber]}, nok: {answersInput[questionNumber]}");
                         allAnswersCorrect = false;
                     }
                     else
                     {
-                        Console.WriteLine($"Question {questionNumber}: Correct Answer {answers[questionNumber]}");
+                        //Console.WriteLine($"Question {questionNumber}: Correct Answer {answers[questionNumber]}");
                         score++;
                     }
                 }
@@ -611,15 +778,6 @@ namespace BattleOfWits
                     Console.WriteLine($"Question {questionNumber}: No Answer Provided");
                     allAnswersCorrect = false;
                 }
-            }
-
-            if (allAnswersCorrect)
-            {
-                Console.WriteLine("All answers are correct!");
-            }
-            else
-            {
-                Console.WriteLine("Some answers are incorrect.");
             }
             return score;
 
